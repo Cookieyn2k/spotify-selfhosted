@@ -1,0 +1,31 @@
+services:
+  navedrome:
+    image: deluan/navidrome:latest
+    container_name: navedrome
+    restart: unless-stopped
+    ports:
+      - "4533:4533"
+    environment:
+      - ND_LASTFM_APIKEY=de039dcd4b89ce16bb6f636ec360e1dc
+      - ND_LASTFM_SECRET=41399b87c9560e0596adce5aacc894c7
+      - ND_LASTFM_ENABLED=true
+      - ND_SCANSCHEDULE=1h
+      - ND_LOGLEVEL=info
+      - ND_SESSIONTIMEOUT=24h
+      - ND_BASEURL=
+    volumes:
+      - ./navedrome/data:/data
+      - ./media/music:/music:ro
+
+  explo:
+    image: ghcr.io/lumepart/explo:latest
+    container_name: explo
+    restart: unless-stopped
+    ports:
+      - "5000:7288"
+    environment:
+      - PORT=7288
+    volumes:
+      - ./explo/config:/config
+      - ./media/music/Explo:/downloads
+      - ./explo/config/cookies.txt:/opt/explo/cookies.txt

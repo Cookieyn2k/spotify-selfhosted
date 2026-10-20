@@ -1,0 +1,6 @@
+media/
+navedrome/
+explo/config/cookies.txt
+explo/config/.env
+*.log
+.DS_Store
